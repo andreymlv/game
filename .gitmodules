@@ -1,0 +1,6 @@
+[submodule "deps/fmt"]
+	path = deps/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "deps/raylib"]
+	path = deps/raylib
+	url = https://github.com/raysan5/raylib.git
