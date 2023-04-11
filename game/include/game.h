@@ -1,5 +1,3 @@
-#if !defined(GAME_LIB_GAMEH)
-#define GAME_LIB_GAMEH
 #include <string>
 namespace game {
 constexpr int16_t kHeight = 500;
@@ -45,12 +43,17 @@ class Npc {
 
 class Cam {
   Position pos_;
-  int16_t height_;
   int16_t width_;
+  int16_t height_;
 };
 
 class Window {
-	
+private:
+  int16_t width_;
+  int16_t height_;
+public:
+  Window(int16_t width, int16_t height);
+  ~Window();
 };
 
 class Game {
@@ -63,5 +66,3 @@ class Game {
 };
 
 }  // namespace game
-
-#endif  // GAME_LIB_GAMEH

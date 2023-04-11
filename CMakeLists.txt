@@ -4,17 +4,27 @@ project(zelda)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_subdirectory(deps/fmt)
-add_subdirectory(deps/raylib)
-add_subdirectory(lib)
+add_subdirectory(game/deps/fmt)
+add_subdirectory(game/deps/raylib)
+add_subdirectory(game/deps/raylib-cpp)
 
-file(GLOB RESOURCES ${PROJECT_SOURCE_DIR}/res/*)
-file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/game/*.cpp)
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -std=c++11")
+endif()
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${RESOURCES})
+file(GLOB RESOURCES ${PROJECT_SOURCE_DIR}/game/res/*)
+file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/game/src/*.cpp)
+file(GLOB HEADERS ${PROJECT_SOURCE_DIR}/game/include/*.h)
 
-target_link_libraries(${PROJECT_NAME} lib fmt raylib)
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${RESOURCES})
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC ${PROJECT_SOURCE_DIR}/game/include
+)
+target_link_libraries(${PROJECT_NAME} fmt raylib raylib_cpp)
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/res $<TARGET_FILE_DIR:${PROJECT_NAME}>/res
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/game/res $<TARGET_FILE_DIR:${PROJECT_NAME}>/res
     DEPENDS ${RESOURCES})
