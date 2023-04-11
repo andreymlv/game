@@ -1,9 +1,9 @@
 [submodule "game/deps/fmt"]
 	path = game/deps/fmt
 	url = https://github.com/fmtlib/fmt.git
-[submodule "game/deps/raylib-cpp"]
-	path = game/deps/raylib-cpp
-	url = https://github.com/RobLoach/raylib-cpp.git
 [submodule "game/deps/raylib"]
 	path = game/deps/raylib
 	url = https://github.com/raysan5/raylib
+[submodule "game/deps/raylib-cpp"]
+	path = game/deps/raylib-cpp
+	url = https://github.com/RobLoach/raylib-cpp
