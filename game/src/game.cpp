@@ -5,33 +5,28 @@
 #define MAX_FRAME_SPEED 15
 #define MIN_FRAME_SPEED 1
 
-game::Game::Game() : title_("Zelda Clone") {}
+game::Game::Game() : title_("Zelda Clone") { SetTargetFPS(60); }
 
-void game::Game::run() {
-  int screenWidth = 800;
-  int screenHeight = 450;
+bool game::Game::IsRunning() { return !window_.ShouldClose(); }
+
+void game::Game::Draw() {
   raylib::Color textColor = raylib::Color::LightGray();
-  raylib::Window window(screenWidth, screenHeight,
-                        "raylib [core] example - basic window");
-
-  SetTargetFPS(60);
-
-  // Main game loop
-  while (!window.ShouldClose()) {  // Detect window close button or ESC key
-    // Update
-    //----------------------------------------------------------------------------------
-    // Update your variables here
-    //----------------------------------------------------------------------------------
-
-    // Draw
-    //----------------------------------------------------------------------------------
-    BeginDrawing();
-    {
-      window.ClearBackground(RAYWHITE);
-      textColor.DrawText("Congrats! You created your first window!", 190, 200,
-                         20);
-    }
-    EndDrawing();
-    //----------------------------------------------------------------------------------
+  BeginDrawing();
+  {
+    window_.ClearBackground(RAYWHITE);
+    textColor.DrawText("Congrats! You created your first window!", 190, 200,
+                       50);
   }
+  EndDrawing();
 }
+
+game::Game& game::Game::Next() { return *this; }
+
+game::Game& game::Game::Poll() {
+  if (IsKeyPressed(KEY_ESCAPE)) {
+    window_.Close();
+  }
+  return *this;
+}
+
+game::World::World() { cells_.reserve(kWidth * kHeight); }

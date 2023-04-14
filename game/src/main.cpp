@@ -2,6 +2,10 @@
 
 int main(void) {
   game::Game game;
-  game.run();
+  while (game.IsRunning()) {
+    game = game.Poll();
+    game = game.Next();
+    game.Draw();
+  }
   return 0;
 }
