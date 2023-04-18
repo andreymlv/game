@@ -2,10 +2,7 @@
 
 #include <raylib-cpp.hpp>
 
-#define MAX_FRAME_SPEED 15
-#define MIN_FRAME_SPEED 1
-
-game::Game::Game() : title_("Zelda Clone") {
+game::Game::Game() : title_("Zelda Clone"), window_(raylib::Window(kWidth, kHeight, title_)) {
   SetTargetFPS(60);
   textures_.emplace(Landscape::Earth, new raylib::Texture("res/img/earth.png"));
 }
@@ -32,4 +29,3 @@ game::Game& game::Game::Poll() {
   return *this;
 }
 
-game::World::World() { cells_.reserve(kWidth * kHeight); }

@@ -14,14 +14,14 @@ constexpr int16_t kWidth = 1280;
 enum class Landscape { Earth, Water, Rock, Bush };
 
 class Position {
-  int16_t x_ = 0;
-  int16_t y_ = 0;
+  int16_t x_;
+  int16_t y_;
 };
 
 class Cell {
  private:
   Landscape land_;
-  bool canPass_ = true;
+  bool canPass_;
 };
 
 class World {
@@ -34,38 +34,42 @@ class World {
 };
 
 class Item {
-  int16_t id_ = 0;
+  int16_t id_;
 };
 
 class Enemy {
-  int16_t health_ = 0;
-  int16_t drop_ = 0;
-  float speed_ = 0.0f;
+  int16_t health_;
+  int16_t drop_;
+  float speed_;
 };
 
 class Hero {
-  int16_t health_ = 0;
-  int16_t arrows_ = 0;
-  int16_t bombs_ = 0;
+  int16_t health_;
+  int16_t arrows_;
+  int16_t bombs_;
   std::vector<Item> inventory_;
-  float speed_ = 0.0f;
+  float speed_;
 };
 
 class Npc {
-  int16_t health_ = 0;
-  int16_t drop_ = 0;
-  float speed_ = 0.0f;
+  int16_t health_;
+  int16_t drop_;
+  float speed_;
 };
 
 class Camera {
+ private:
   Position pos_;
-  int16_t width_{kWidth};
-  int16_t height_{kHeight};
+  int16_t width_;
+  int16_t height_;
+
+ public:
+  Camera();
 };
 
 class Game {
  private:
-  std::string title_{"Zelda Clone"};
+  std::string title_;
   raylib::Window window_{kWidth, kHeight, title_};
   Camera camera_;
   World World_;
