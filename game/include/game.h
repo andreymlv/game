@@ -11,8 +11,8 @@ namespace game {
 constexpr int16_t kHeight = 720;
 constexpr int16_t kWidth = 1280;
 
-enum class Landscape { Earth, Water, Rock, Bush };
 
+enum class Landscape { Empty, Earth, Water, Rock, Bush };
 
 class Cell {
  private:
