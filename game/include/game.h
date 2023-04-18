@@ -13,10 +13,6 @@ constexpr int16_t kWidth = 1280;
 
 enum class Landscape { Earth, Water, Rock, Bush };
 
-class Position {
-  int16_t x_;
-  int16_t y_;
-};
 
 class Cell {
  private:
@@ -31,6 +27,7 @@ class World {
  public:
   World();
   bool CanMoveInside(Position pos);
+  bool CanMoveInside(raylib::Vector2 pos);
 };
 
 class Item {
