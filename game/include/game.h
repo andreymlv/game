@@ -57,22 +57,12 @@ class Npc {
   float speed_;
 };
 
-class Camera {
- private:
-  Position pos_;
-  int16_t width_;
-  int16_t height_;
-
- public:
-  Camera();
-};
-
 class Game {
  private:
   std::string title_;
   raylib::Window window_;
-  Camera camera_;
   World World_;
+  raylib::Camera2D camera_;
   std::vector<Npc> npcs_;
   std::vector<Enemy> enemies_;
   std::map<Landscape, std::shared_ptr<raylib::Texture>> textures_;
