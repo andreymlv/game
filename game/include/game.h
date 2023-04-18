@@ -24,16 +24,22 @@ class Cell {
  private:
   Landscape land_;
   bool canPass_;
+
+ public:
+  Cell();
+  Cell(Landscape land);
 };
 
 class World {
  private:
-  std::vector<Cell> cells_;
+  Matrix2D<Cell, kWidth, kHeight> cells_;
 
  public:
-  World();
-  bool CanMoveInside(Position pos);
   bool CanMoveInside(raylib::Vector2 pos);
+  void FillWithEarth();
+
+  template <size_t width, size_t height>
+  Matrix2D<Cell, width, height> Project(raylib::Camera2D cam);
 };
 
 class Item {
@@ -64,8 +70,8 @@ class Game {
  private:
   std::string title_;
   raylib::Window window_;
-  World World_;
   raylib::Camera2D camera_;
+  World world_;
   std::vector<Npc> npcs_;
   std::vector<Enemy> enemies_;
   std::map<Landscape, std::shared_ptr<raylib::Texture>> textures_;
