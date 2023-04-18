@@ -1,6 +1,10 @@
+#include <cstddef>
+#include <cstdint>
+
 #if !defined(GAME_GAMEH)
 #define GAME_GAMEH
 
+#include <array>
 #include <map>
 #include <memory>
 #include <raylib-cpp.hpp>
@@ -11,6 +15,8 @@ namespace game {
 constexpr int16_t kHeight = 720;
 constexpr int16_t kWidth = 1280;
 
+template <class T, size_t width, size_t height>
+using Matrix2D = std::array<std::array<T, height>, width>;
 
 enum class Landscape { Empty, Earth, Water, Rock, Bush };
 
