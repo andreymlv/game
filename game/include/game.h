@@ -70,7 +70,7 @@ class Camera {
 class Game {
  private:
   std::string title_;
-  raylib::Window window_{kWidth, kHeight, title_};
+  raylib::Window window_;
   Camera camera_;
   World World_;
   std::vector<Npc> npcs_;
