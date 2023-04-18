@@ -71,12 +71,11 @@ class Game {
   World World_;
   std::vector<Npc> npcs_;
   std::vector<Enemy> enemies_;
-  std::map<Landscape, raylib::Texture*> textures_;
+  std::map<Landscape, std::shared_ptr<raylib::Texture>> textures_;
   Hero hero_;
 
  public:
   Game();
-  ~Game();
   Game& Next();
   Game& Poll();
   void Draw();

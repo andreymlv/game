@@ -7,10 +7,8 @@
 
 game::Game::Game() : title_("Zelda Clone") {
   SetTargetFPS(60);
-  textures_[Landscape::Earth] = new raylib::Texture("res/img/earth.png");
+  textures_.emplace(Landscape::Earth, new raylib::Texture("res/img/earth.png"));
 }
-
-game::Game::~Game() { delete textures_[Landscape::Earth]; }
 
 bool game::Game::IsRunning() { return !window_.ShouldClose(); }
 
