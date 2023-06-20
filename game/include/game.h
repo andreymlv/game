@@ -21,38 +21,40 @@ using Matrix2D = std::array<std::array<T, height>, width>;
 enum class Landscape { Empty, Earth, Water, Rock, Bush };
 
 class Cell {
- private:
-  Landscape land_;
-  bool canPass_;
-
  public:
   Cell();
   Cell(Landscape land);
+
+ private:
+  Landscape land_;
+  bool canPass_;
 };
 
 class World {
- private:
-  Matrix2D<Cell, kWidth, kHeight> cells_;
-
  public:
   bool CanMoveInside(raylib::Vector2 pos);
   void FillWithEarth();
-
   template <size_t width, size_t height>
   Matrix2D<Cell, width, height> Project(raylib::Camera2D cam);
+
+ private:
+  Matrix2D<Cell, kWidth, kHeight> cells_;
 };
 
 class Item {
+ private:
   int16_t id_;
 };
 
 class Enemy {
+ private:
   int16_t health_;
   int16_t drop_;
   float speed_;
 };
 
 class Hero {
+ private:
   int16_t health_;
   int16_t arrows_;
   int16_t bombs_;
@@ -61,12 +63,20 @@ class Hero {
 };
 
 class Npc {
+ private:
   int16_t health_;
   int16_t drop_;
   float speed_;
 };
 
 class Game {
+ public:
+  Game();
+  Game& Next();
+  Game& Poll();
+  void Draw();
+  bool IsRunning();
+
  private:
   std::string title_;
   raylib::Window window_;
@@ -76,13 +86,6 @@ class Game {
   std::vector<Enemy> enemies_;
   std::map<Landscape, std::shared_ptr<raylib::Texture>> textures_;
   Hero hero_;
-
- public:
-  Game();
-  Game& Next();
-  Game& Poll();
-  void Draw();
-  bool IsRunning();
 };
 
 }  // namespace game
