@@ -11,8 +11,8 @@
 game::Game::Game()
     : title_("Zelda Clone"), window_(raylib::Window(kWidth, kHeight, title_)) {
   SetTargetFPS(60);
-  textures_.emplace(Landscape::Earth, new raylib::Texture("res/img/earth.png"));
-  camera_.SetZoom(1.0f);
+  textures_.emplace(Landscape::kEarth, new raylib::Texture("res/img/earth.png"));
+  camera_.SetZoom(1.0F);
 }
 
 bool game::Game::IsRunning() { return !window_.ShouldClose(); }
@@ -23,7 +23,7 @@ void game::Game::Draw() {
     window_.ClearBackground(RAYWHITE);
     camera_.BeginMode();
     {
-      textures_[Landscape::Earth]->Draw(50, 50);
+      textures_[Landscape::kEarth]->Draw(50, 50);
       DrawCircle(100, 100, 50, YELLOW);
     }
     camera_.EndMode();
@@ -39,7 +39,7 @@ game::Game& game::Game::Poll() {
   }
   if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
     Vector2 delta = GetMouseDelta();
-    delta = Vector2Scale(delta, -1.0f / camera_.zoom);
+    delta = Vector2Scale(delta, -1.0F / camera_.zoom);
 
     camera_.target = Vector2Add(camera_.target, delta);
   }

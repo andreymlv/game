@@ -15,15 +15,15 @@ namespace game {
 constexpr int16_t kHeight = 720;
 constexpr int16_t kWidth = 1280;
 
-template <class T, size_t width, size_t height>
-using Matrix2D = std::array<std::array<T, height>, width>;
+template <class T, size_t Width, size_t Height>
+using Matrix2D = std::array<std::array<T, Height>, Width>;
 
-enum class Landscape { Empty, Earth, Water, Rock, Bush };
+enum class Landscape { kEmpty, kEarth, kWater, kRock, kBush };
 
 class Cell {
  public:
   Cell();
-  Cell(Landscape land);
+  explicit Cell(Landscape land);
 
  private:
   Landscape land_;
@@ -34,8 +34,8 @@ class World {
  public:
   bool CanMoveInside(raylib::Vector2 pos);
   void FillWithEarth();
-  template <size_t width, size_t height>
-  Matrix2D<Cell, width, height> Project(raylib::Camera2D cam);
+  template <size_t Width, size_t Height>
+  Matrix2D<Cell, Width, Height> Project(raylib::Camera2D cam);
 
  private:
   Matrix2D<Cell, kWidth, kHeight> cells_;
